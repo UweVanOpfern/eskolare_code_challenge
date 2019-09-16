@@ -1,0 +1,29 @@
+{% extends "book/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ object.cover.url }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ object.author }}</a>
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'book-update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'book-delete' object.id %}">Delete</a>
+            </div>
+            <br>
+            <a class="btn btn-infor btn-sm mt-1 mb-1" href="{% url 'read-book' object.id %}">Press here to read book</a>
+            <br>
+        </div>
+        <h2 class="article-title">{{ object.title }}</h2>
+        <p class="article-content"><strong>Category : {{ book.category }}</strong></p>
+    </div>
+</article>
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="{% url 'review-create' %}">Add new review</a>
+            | <a class="mr-2" href="{% url 'book-review' object.id %}">view reviews</a>
+        </div>
+    </div>
+</article>
+{% endblock content %}

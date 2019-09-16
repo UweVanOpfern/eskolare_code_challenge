@@ -1,0 +1,25 @@
+{% extends "book/base.html" %}
+{% block content %}
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Cover</th>
+        <th scope="col">Title</th>
+        <th scope="col">Category</th>
+        <th scope="col">Author</th>
+        <th scope="col">Read status</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+    <tr>
+        <th scope="row"><img class="rounded-circle article-img" src="{{ book.cover.url }}"></th>
+        <td><a href="{% url 'book-detail' book.id %}">{{ book.title }}</a></td>
+        <td>{{ book.category }}</td>
+        <td>{{ book.author }}</td>
+        <td><span class="badge">{{ book.is_read }}</span></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "book/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Review(s)</h1>
+<article class="media content-section">
+    <div class="media-body">
+        {% for data in reviews %}
+        <p class="article-content"><strong>{{ data.review }}</strong></p><br><hr>
+        {% endfor %}
+    </div>
+</article>
+{% endblock content %}
