@@ -24,7 +24,7 @@ SECRET_KEY = 'o6%-9rrkp*ud6p0*6+^@aoxt=aweu8+%3!fl29lqb*vxzzl7(='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['157.245.83.181']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -83,24 +83,24 @@ WSGI_APPLICATION = 'eskolare.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 # FOR LOCAL
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-# FOR SERVER
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'eskolare',
-        'USER': 'eskolare',
-        'PASSWORD': 'uweaime@123',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# FOR SERVER
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'eskolare',
+#         'USER': 'eskolare',
+#         'PASSWORD': 'uweaime@123',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
