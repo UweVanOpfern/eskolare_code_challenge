@@ -24,7 +24,4 @@ urlpatterns = [
     path('api/v1/', include('book.api_urls')),
     path('accounts/', include('allauth.urls')),
 
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
