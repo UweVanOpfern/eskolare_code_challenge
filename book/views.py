@@ -1,16 +1,14 @@
-from django.contrib.auth import get_user_model, login, update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import get_user_model
+from django.contrib import messages
+from django.contrib.auth import (authenticate, get_user_model, login, logout, )
+from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
+from django.core.mail import send_mail
 from django.forms import ModelForm
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
+from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.views import View
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import (authenticate, get_user_model, login, logout, )
 from django.views.generic import (
     ListView,
     DetailView,
@@ -26,9 +24,6 @@ from .forms import (RegisterForm, LoginForm)
 from .models import Book, Review
 from .serializers import BookSerializer, ReviewSerializer
 from .tokens import account_activation_token
-from django.template.loader import render_to_string
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 
 
 class BookRegistrationForm(ModelForm):
@@ -195,11 +190,9 @@ def register(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
+
             to_email = form.cleaned_data.get('email')
-            email = EmailMessage(
-                mail_subject, message, to=[to_email]
-            )
-            email.send(fail_silently=True)
+            send_mail(mail_subject, message, 'infos@idatech.rw', [to_email, ], fail_silently=False)
             return render(request, 'book/confirm_email_notify.html')
     else:
         form = RegisterForm()
